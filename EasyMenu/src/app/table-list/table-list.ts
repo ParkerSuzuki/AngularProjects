@@ -5,6 +5,8 @@ import { collection, DocumentData, onSnapshot } from 'firebase/firestore';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
 import { FIRESTORE } from '../app.config';
+import { MatDialog } from '@angular/material/dialog';
+import { Order } from '../order/order';
 
 @Component({
   selector: 'app-table-list',
@@ -13,6 +15,7 @@ import { FIRESTORE } from '../app.config';
   styleUrl: './table-list.scss',
 })
 export class TableList {
+  private dialog = inject(MatDialog);
   private firestore = inject(FIRESTORE);
   private tableCol = collection(this.firestore, 'tables');
   readonly tables = toSignal(
@@ -22,4 +25,11 @@ export class TableList {
       )
     )
   );
+
+  select(no: number) {
+    this.dialog.open(Order, {
+      width: '500px',
+      data: no
+    });
+  }
 }
