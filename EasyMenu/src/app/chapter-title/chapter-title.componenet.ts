@@ -1,10 +1,13 @@
 import { Component, input } from '@angular/core';
+import { MatToolbar } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-chapter-title',
-  imports: [],
+  imports: [MatToolbar],
   template: `
-    <span class="title">{{title()}}</span>
+    <mat-toolbar>
+      <span class="title">{{title()}}</span>
+    </mat-toolbar>
   `,
   styles: ``,
 })
