@@ -12,4 +12,12 @@ export class Issues {
       return [...issues, issue];
     })
   }
+
+  resolve(no: number) {
+    const i = this.issues().findIndex(i => i.issueNo === no);
+    this.issues.update(issues => {
+      issues[i].completed = true;
+      return [...issues];
+    });
+  }
 }
