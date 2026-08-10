@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ClrFormsModule } from '@clr/angular';
 
 @Component({
@@ -10,9 +10,9 @@ import { ClrFormsModule } from '@clr/angular';
 })
 export class IssueReporter {
   form = new FormGroup({
-    title: new FormControl(''),
+    title: new FormControl('', Validators.required),
     description: new FormControl(''),
-    priority: new FormControl(''),
-    type: new FormControl(''),
+    priority: new FormControl('', Validators.required),
+    type: new FormControl('', Validators.required),
   })
 }
