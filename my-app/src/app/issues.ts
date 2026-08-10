@@ -6,4 +6,10 @@ import { issueData } from '../../public/mock-issues';
 export class Issues {
   readonly issues = signal<Issue[]>(issueData);
 
+  create(issue: Issue) {
+    this.issues.update(issues => {
+      issue.issueNo = this.issues().length + 1;
+      return [...issues, issue];
+    })
+  }
 }

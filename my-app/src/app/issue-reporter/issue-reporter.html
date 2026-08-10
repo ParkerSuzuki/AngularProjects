@@ -32,10 +32,10 @@
   <clr-select-container>
     <label>Type</label>
     <select clrSelect formControlName="type">
-      <option value="Feature">Feature/option>
+      <option value="Feature">Feature</option>
       <option value="Bug">Bug</option>
     </select>
     <clr-control-error>Feature is required</clr-control-error>
   </clr-select-container>
-  <button class="btn btn-primary">Create</button>
+  <button class="btn btn-primary" (click)="create()">Create</button>
 </form>
