@@ -1,12 +1,13 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject, signal } from '@angular/core';
+import { ChapterService } from './chapter';
+import { ChapterTitle } from "./chapter-title/chapter-title.componenet";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [ChapterTitle],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('EasyMenu');
+  protected readonly chapterService = inject(ChapterService);
 }
