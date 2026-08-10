@@ -1,0 +1,37 @@
+<form clrForm [formGroup]="form">
+  <clr-input-container>
+    <label>Title</label>
+    <input clrInput formControlName="title" />
+  </clr-input-container>
+  <clr-textarea-container>
+    <label>Description</label>
+    <textarea clrTextarea formControlName="description">
+    </textarea>
+  </clr-textarea-container>
+  <clr-radio-container clrInline>
+    <label>Priority</label>
+    <clr-radio-wrapper>
+      <input
+        type="radio"
+        value="low"
+        clrRadio
+        formControlName="priorty" />
+      <label>Low</label>
+    </clr-radio-wrapper>
+    <clr-radio-wrapper>
+      <input
+      type="radio"
+      value="high"
+      clrRadio
+      formControlName="priorty" />
+    </clr-radio-wrapper>
+  </clr-radio-container>
+  <clr-select-container>
+    <label>Type</label>
+    <select clrSelect formControlName="type">
+      <option value="Feature">Feature/option>
+      <option value="Bug">Bug</option>
+    </select>
+  </clr-select-container>
+  <button class="btn btn-primary">Create</button>
+</form>
