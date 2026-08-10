@@ -13,17 +13,27 @@ import { Issue } from '../issue';
 export class IssueReporter {
   private issueService = inject(Issues);
 
-  form = new FormGroup({
+  form!: FormGroup;
+  private buildForm() {
+    this.form = new FormGroup({
     title: new FormControl('', Validators.required),
     description: new FormControl(''),
     priority: new FormControl('', Validators.required),
     type: new FormControl('', Validators.required),
   });
 
+  }
+
+  constructor() {
+    this.buildForm();
+  }
+
   create() {
     if (!this.form.valid) {
       return;
     }
     this.issueService.create(this.form.value as Issue);
+    this.form.reset();
+    this.buildForm();
   }
 }
