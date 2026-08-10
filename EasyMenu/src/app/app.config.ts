@@ -1,7 +1,7 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { ApplicationConfig, InjectionToken, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { initializeApp } from 'firebase/app';
+import { Firestore, getFirestore } from 'firebase/firestore';
 import { routes } from './app.routes';
 
 const firebaseConfig = {
@@ -13,11 +13,14 @@ const firebaseConfig = {
   appId: "1:62137100829:web:6f809bdfd694e89f18f4f4"
 };
 
+const firebaseApp = initializeApp(firebaseConfig);
+
+export const FIRESTORE = new InjectionToken<Firestore>('firestore');
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
-    provideFirebaseApp(() => initializeApp(firebaseConfig)),
-    provideFirestore(() => getFirestore())
+    { provide: FIRESTORE, useFactory: () => getFirestore(firebaseApp) }
   ]
 };
