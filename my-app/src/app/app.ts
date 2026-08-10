@@ -4,6 +4,7 @@ import { ChapterTitle } from './chapter-title/chapter-title.componenet';
 import { ChapterService } from './chapter';
 import { ClrLayoutModule } from '@clr/angular';
 import { IssueList } from './issue-list/issue-list';
+import { IssueReporter } from "./issue-reporter/issue-reporter";
 
 @Component({
   selector: 'app-root',
@@ -11,8 +12,9 @@ import { IssueList } from './issue-list/issue-list';
     RouterOutlet,
     ChapterTitle,
     ClrLayoutModule,
-    IssueList
-  ],
+    IssueList,
+    IssueReporter
+],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
