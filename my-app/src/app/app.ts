@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ChapterTitle } from './chapter-title/chapter-title';
+import { ChapterService } from './chapter';
 
 @Component({
   selector: 'app-root',
@@ -10,5 +11,5 @@ import { ChapterTitle } from './chapter-title/chapter-title';
 })
 export class App {
   protected readonly title = signal('my-app');
-  protected readonly chapterTitle = signal('Chapter 1: Angular AI Kick-Starter');
+  protected readonly chapterService = inject(ChapterService);
 }
