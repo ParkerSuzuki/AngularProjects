@@ -6,8 +6,8 @@
     @for (m of menu; track $index) {
      <div mat-mat-subheader>{{m.name}}</div>
      @for (item of m.items; track $index) {
-      <mat-list-item>{{item.name}}</mat-list-item>
-     }
+      <app-order-item [name]="item.name" />
+    }
      <mat-divider />
     }
   </mat-list>
