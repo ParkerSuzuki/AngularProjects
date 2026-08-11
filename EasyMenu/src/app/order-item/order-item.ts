@@ -1,4 +1,4 @@
-import { Component, input, model } from '@angular/core';
+import { Component, input, linkedSignal } from '@angular/core';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 @Component({
@@ -9,8 +9,9 @@ import { MatIcon } from '@angular/material/icon';
 })
 export class OrderItem {
   readonly name = input('');
-  readonly qty = model(0);
+  readonly initialQty = input(0);
   readonly price = input<number | undefined>();
+  readonly qty = linkedSignal(() => this.initialQty());
 
   add() {
     this.qty.update(qty => qty + 1);

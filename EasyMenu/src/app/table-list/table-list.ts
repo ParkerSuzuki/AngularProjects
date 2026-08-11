@@ -22,7 +22,7 @@ export class TableList {
   readonly tables = toSignal(
     new Observable<DocumentData[]>(subscriber =>
       onSnapshot(this.tableCol, snapshot =>
-        subscriber.next(snapshot.docs.map(doc => doc.data()))
+        subscriber.next(snapshot.docs.map(d => ({ id: d.id, ...d.data() })))
       )
     )
   );
@@ -31,15 +31,15 @@ export class TableList {
     return items?.reduce((sum, item) => sum + item.qty * item.price, 0) ?? 0;
   }
 
-  select(no: number) {
+  select(table: any) {
     this.dialog.open(Order, {
       width: '500px',
-      data: no
+      data: table
     }).afterClosed().subscribe(
       async items => {
         if (items) {
-          const tableDoc = doc(this.tableCol, no.toString());
-          await updateDoc(tableDoc, {items});
+          const tableDoc = doc(this.tableCol, table.id);
+          await updateDoc(tableDoc, { items });
         }
     });
   }

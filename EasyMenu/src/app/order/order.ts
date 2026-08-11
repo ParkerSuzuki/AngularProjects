@@ -28,6 +28,10 @@ export class Order {
   data = inject(MAT_DIALOG_DATA);
   menu = menu;
 
+  getQty(name: string): number {
+    return this.data.items?.find((i: any) => i.name === name)?.qty ?? 0;
+  }
+
   ok() {
     const items = this.orderItems()
       .filter(item => item.qty())
