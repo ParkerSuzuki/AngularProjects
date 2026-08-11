@@ -7,10 +7,11 @@ import { Observable } from 'rxjs';
 import { FIRESTORE } from '../app.config';
 import { MatDialog } from '@angular/material/dialog';
 import { Order } from '../order/order';
+import { MatDivider } from "@angular/material/divider";
 
 @Component({
   selector: 'app-table-list',
-  imports: [MatGridListModule, MatCardModule],
+  imports: [MatGridListModule, MatCardModule, MatDivider],
   templateUrl: './table-list.html',
   styleUrl: './table-list.scss',
 })
@@ -25,6 +26,10 @@ export class TableList {
       )
     )
   );
+
+  total(items: any[]): number {
+    return items?.reduce((sum, item) => sum + item.qty * item.price, 0) ?? 0;
+  }
 
   select(no: number) {
     this.dialog.open(Order, {

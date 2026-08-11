@@ -10,6 +10,7 @@ import { MatIcon } from '@angular/material/icon';
 export class OrderItem {
   readonly name = input('');
   readonly qty = model(0);
+  readonly price = input<number | undefined>();
 
   add() {
     this.qty.update(qty => qty + 1);

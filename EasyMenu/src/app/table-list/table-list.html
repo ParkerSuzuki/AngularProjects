@@ -6,6 +6,13 @@
         <mat-card-header>
           <mat-card-title># {{tableId}}</mat-card-title>
         </mat-card-header>
+        <mat-card-content>
+          @for (item of table['items']; track item) {
+            <p>{{item.name}} x{{item.qty}}</p>
+          }
+          <mat-divider />
+          <p>Total: ${{total(table['items'])}}</p>
+        </mat-card-content>
       </mat-card>
     </mat-grid-tile>
   }

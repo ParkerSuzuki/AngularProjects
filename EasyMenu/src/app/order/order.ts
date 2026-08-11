@@ -34,7 +34,8 @@ export class Order {
       .map(i => {
         return {
           name: i.name(),
-          qty: i.qty()
+          qty: i.qty(),
+          price: i.price()
         }
       });
       this.dialogRef.close(items);
