@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
-import { collection, DocumentData, onSnapshot } from 'firebase/firestore';
+import { collection, DocumentData, onSnapshot, doc, updateDoc } from 'firebase/firestore';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
 import { FIRESTORE } from '../app.config';
@@ -30,6 +30,12 @@ export class TableList {
     this.dialog.open(Order, {
       width: '500px',
       data: no
+    }).afterClosed().subscribe(
+      async items => {
+        if (items) {
+          const tableDoc = doc(this.tableCol, no.toString());
+          await updateDoc(tableDoc, {items});
+        }
     });
   }
 }
