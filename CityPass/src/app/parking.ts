@@ -1,14 +1,14 @@
-import { inject, Inject, Injectable, Service } from '@angular/core';
+import { inject, Inject, Injectable, Service, signal } from '@angular/core';
 import { ChatSession, FunctionDeclarationsTool, getAI, getGenerativeModel, Schema } from 'firebase/ai';
 import { FirebaseApp } from 'firebase/app';
+import { Ticket } from './ticket';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Parking {
   private readonly chat: ChatSession;
-
-
+  readonly tickets = signal<Ticket[]>([]);
 
   constructor(
     @Inject('FIREBASE_APP') firebaseApp: FirebaseApp
@@ -48,10 +48,31 @@ export class Parking {
   }
 
   createTicket(plate: string, arrival: Date, loc: string) {
-    console.table([{
+    const ticket: Ticket = {
       'plateNo': plate,
       'arrival': arrival,
-      'location': location
-    }]);
+      'location': loc
+    };
+
+    console.table([ticket]);
+
+    this.tickets.update(tickets => [
+      ...tickets,
+      ticket
+    ]);
+  }
+
+  async ask(prompt: string) {
+    let result = await this.chat.sendMessage(prompt);
+    const calls = result.response.functionCalls();
+
+    if (calls && calls[0].name === 'addTicket') {
+      const args = calls[0].args as Record<string, string>;
+      this.createTicket(
+        args['plateNo'],
+        new Date(args['arrival']),
+        args['location']
+      );
+    }
   }
 }

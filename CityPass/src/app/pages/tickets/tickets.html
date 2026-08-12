@@ -31,4 +31,22 @@
         >Submit</button>
     </nz-form-control>
   </nz-form-item>
+  <button nz-button type="button" nzType="link" (click)="isVisible.set(true)">
+    AI Creator
+  </button>
 </form>
+
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="AI Creator"
+  (nzOnCancel)="isVisible.set(false)"
+  (nzOnOk)="ok()">
+  <ng-container *nzModalContent>
+    <textarea
+      [(ngModel)]="prompt"
+      rows="3"
+      placeholder="Enter ticket details"
+      nz input>
+      </textarea>
+  </ng-container>
+</nz-modal>"
