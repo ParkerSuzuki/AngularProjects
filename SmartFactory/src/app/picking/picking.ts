@@ -1,6 +1,7 @@
 import { afterNextRender, Component, inject, signal, viewChild } from '@angular/core';
 import { NgxScannerQrcodeComponent } from 'ngx-scanner-qrcode';
 import { Products } from '../products';
+import { Product } from '../product';
 
 @Component({
   selector: 'app-picking',
@@ -14,7 +15,7 @@ export class Picking {
   readonly scanner = viewChild.required(
     NgxScannerQrcodeComponent
   );
-  items = signal<string[]>([]);
+  items = signal<Product[]>([]);
 
   constructor() {
     afterNextRender(() => {
@@ -31,10 +32,14 @@ export class Picking {
   private getProduct(code: string) {
     const id = code.substring(code.lastIndexOf('/') + 1);
     this.productsService.getSingle(Number(id)).subscribe(p => {
-      if (!this.items().includes(p.title)) {
-        this.items.update(i => [...i, p.title]);
+      if (!this.items().some(i => i.id === p.id)) {
+        this.items.update(i => [...i, p]);
         this.scanner().data.next([]);
       }
     });
+  }
+
+  total(): number {
+    return this.items()?.reduce((sum, item) => sum + item.price, 0) ?? 0;
   }
 }
