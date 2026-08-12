@@ -1,1 +1,34 @@
-<p>tickets works!</p>
+<form nz-form #ticketForm="ngForm" (ngSubmit)="add()">
+  <nz-form-item>
+  <nz-form-label nzFor="plateNo" nzRequired>
+    Plate number
+  </nz-form-label>
+  <nz-form-control>
+    <input nz-input name="plateNo" id="plateNo" [(ngModel)]="plateNo"/>
+  </nz-form-control>
+</nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzRequired>Arrival</nz-form-label>
+    <nz-form-control>
+      <nz-date-picker name="arrival" nzShowTime [(ngModel)]="arrival" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzFor="location" nzRequired>
+      Location
+    </nz-form-label>
+    <nz-form-control>
+      <input nz-input name="location" id="location" [(ngModel)]="location"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <button
+        nz-button
+        nzType="primary"
+        type="submit"
+        [disabled]="ticketForm.invalid"
+        >Submit</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>
