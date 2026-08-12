@@ -1,6 +1,9 @@
 import { Routes } from '@angular/router';
 import { ProductList } from './product-list/product-list';
+import { ProductDetail } from './product-detail/product-detail';
+import { productResolver } from './product-resolver';
 
 export const routes: Routes = [
-  { path: '', component: ProductList }
+  { path: '', component: ProductList },
+  { path: ':id', component: ProductDetail, resolve: {product: productResolver}}
 ];
