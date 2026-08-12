@@ -6,4 +6,8 @@ export const routes: Routes = [
     path: 'welcome',
     loadChildren: () => import('./pages/welcome/welcome.routes').then((m) => m.WELCOME_ROUTES),
   },
+  {
+    path: 'tickets',
+    loadChildren: () => import('./pages/tickets/tickets.routes').then(m => m.TICKETS_ROUTES)
+  }
 ];
