@@ -8,7 +8,13 @@ import { Ticket } from './ticket';
 })
 export class Parking {
   private readonly chat: ChatSession;
-  readonly tickets = signal<Ticket[]>([]);
+  readonly tickets = signal<Ticket[]>([
+    {
+      plateNo: 'ABC564',
+      arrival: new Date('2025-12-22T06:00:00-07:00'),
+      location: '23.7275, 37.9838'
+    }
+  ]);
 
   constructor(
     @Inject('FIREBASE_APP') firebaseApp: FirebaseApp
