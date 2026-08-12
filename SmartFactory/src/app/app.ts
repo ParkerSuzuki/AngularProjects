@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { ChapterTitleComponent } from './chapter-title.component';
 import { ChapterTitleService } from './chapter-title.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ChapterTitleComponent],
+  imports: [RouterOutlet, ChapterTitleComponent, RouterLink],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
