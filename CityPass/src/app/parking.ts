@@ -2,12 +2,14 @@ import { inject, Inject, Injectable, Service, signal } from '@angular/core';
 import { ChatSession, FunctionDeclarationsTool, getAI, getGenerativeModel, Schema } from 'firebase/ai';
 import { FirebaseApp } from 'firebase/app';
 import { Ticket } from './ticket';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Parking {
   private readonly chat: ChatSession;
+  private readonly notification = inject(NzNotificationService);
   readonly tickets = signal<Ticket[]>([
     {
       plateNo: 'ABC564',
@@ -66,6 +68,14 @@ export class Parking {
       ...tickets,
       ticket
     ]);
+    this.createNotification();
+  }
+
+  createNotification(): void {
+    this.notification.blank(
+      'Ticket Created',
+      'Good job'
+    )
   }
 
   async ask(prompt: string) {
